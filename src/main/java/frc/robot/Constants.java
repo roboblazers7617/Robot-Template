@@ -11,13 +11,10 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.MetersPerSecondPerSecond;
 
 import java.io.File;
-import java.util.List;
 
 import com.pathplanner.lib.config.PIDConstants;
 
 import edu.wpi.first.wpilibj.Filesystem;
-import io.github.roboblazers7617.limelight.LimelightSettings.ImuMode;
-import io.github.roboblazers7617.limelight.PoseEstimator.PoseEstimators;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
@@ -232,41 +229,9 @@ public final class Constants {
 	 */
 	public static class VisionConstants {
 		/**
-		 * The name of the front Limelight on NetworkTables.
-		 */
-		public static final String FRONT_LIMELIGHT_NAME = "limelight-front";
-		/**
-		 * The name of the back Limelight on NetworkTables.
-		 */
-		public static final String BACK_LIMELIGHT_NAME = "limelight-back";
-		/**
 		 * Enable vision odometry updates.
 		 */
 		public static final boolean ENABLE_VISION = true;
-		/**
-		 * Use MegaTag2 for pose estimation.
-		 */
-		public static final PoseEstimators POSE_ESTIMATOR_TYPE = PoseEstimators.BLUE_MEGATAG2;
-		/**
-		 * The frequency of processed vision frames while disabled.
-		 */
-		public static final int DISABLED_UPDATE_FREQUENCY = 60;
-		/**
-		 * The {@link ImuMode} to use while disabled.
-		 */
-		public static final ImuMode DISABLED_IMU_MODE = ImuMode.SyncInternalImu;
-		/**
-		 * The {@link ImuMode} to use while enabled.
-		 */
-		public static final ImuMode ENABLED_IMU_MODE = ImuMode.ExternalAssistInternalIMU;
-		/**
-		 * The {@link io.github.roboblazers7617.limelight.LimelightSettings#withArilTagIdFilter(List)} to use on the blue alliance.
-		 */
-		public static final List<Double> BLUE_TAG_ID_FILTER = List.of();
-		/**
-		 * The {@link io.github.roboblazers7617.limelight.LimelightSettings#withArilTagIdFilter(List)} to use on the Red alliance.
-		 */
-		public static final List<Double> RED_TAG_ID_FILTER = List.of();
 	}
 
 	/**
