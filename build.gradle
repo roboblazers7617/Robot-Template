@@ -155,8 +155,8 @@ tasks.withType(Javadoc) {
 	options.setLinks([
 		"https://github.wpilib.org/allwpilib/docs/release/java",
 		"https://codedocs.revrobotics.com/java",
-		"https://api.ctr-electronics.com/phoenix/release/java",
-		"https://api.ctr-electronics.com/phoenix6/release/java",
+		"https://api.ctr-electronics.com/phoenix/latest/java",
+		"https://api.ctr-electronics.com/phoenix6/latest/java",
 		"https://pathplanner.dev/api/java",
 		//"https://apidocs.reduxrobotics.com/v2025.0.0/java",
 		"https://docs.home.thethriftybot.com/javadoc",
