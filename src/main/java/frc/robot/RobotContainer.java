@@ -6,16 +6,8 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.DashboardConstants;
-import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.LoggingConstants;
 import frc.robot.util.Elastic;
-import frc.robot.subsystems.drivetrain.Drivetrain;
-import frc.robot.subsystems.drivetrain.DrivetrainControls;
-import frc.robot.subsystems.drivetrain.Drivetrain.TranslationOrientation;
-import frc.robot.subsystems.Auto;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.epilogue.Logged;
 import edu.wpi.first.epilogue.NotLogged;
@@ -33,17 +25,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 @Logged
 public class RobotContainer {
-	/**
-	 * The sendable chooser for the autonomous command. This is added in the setAutoChooser method which is run when autobuilder is created after an alliance is selected.
-	 */
-	private SendableChooser<Command> autoChooser;
-
-	// The robot's subsystems and commands are defined here...
-	@NotLogged
-	private final Drivetrain drivetrain = new Drivetrain(DrivetrainConstants.CONFIG_DIR);
-	@NotLogged
-	private final DrivetrainControls drivetrainControls = new DrivetrainControls(drivetrain);
-
 	/**
 	 * The Controller used by the Driver of the robot, primarily controlling the drivetrain.
 	 */
@@ -76,32 +57,16 @@ public class RobotContainer {
 		if (!LoggingConstants.DEBUG_MODE) {
 			Elastic.selectTab(DashboardConstants.AUTO_TAB_NAME);
 		}
-
-		// Configure AutoBuilder if not already configured
-		Auto.setupPathPlannerFailsafe(drivetrain);
 	}
 
 	/**
 	 * This method is run at the start of Teleop.
 	 */
 	public void teleopInit() {
-		// Reset the last angle so the robot doesn't try to spin.
-		drivetrain.resetLastAngleScalar();
-
 		// Set the Elastic tab
 		if (!LoggingConstants.DEBUG_MODE) {
 			Elastic.selectTab(DashboardConstants.TELEOP_TAB_NAME);
 		}
-		// if (StubbedCommands.EndEffector.isHoldingAlage()) {
-		// gamepieceMode = GamepieceMode.ALGAE_MODE;
-		// }
-
-		// else {
-		// gamepieceMode = GamepieceMode.CORAL_MODE;
-		// }
-
-		// Configure AutoBuilder if not already configured
-		Auto.setupPathPlannerFailsafe(drivetrain);
 	}
 
 	/**
@@ -112,26 +77,7 @@ public class RobotContainer {
 	/**
 	 * Configures {@link Trigger Triggers} to bind Commands to the Driver Controller buttons.
 	 */
-	private void configureDriverControls() {
-		// Set the default drivetrain command (used for the driver controller)
-		if (RobotBase.isSimulation()) {
-			// Heading control
-			drivetrain.setDefaultCommand(drivetrainControls.driveDirectAngleSimCommand(driverController, TranslationOrientation.FIELD_RELATIVE));
-		} else {
-			// Heading control
-			drivetrain.setDefaultCommand(drivetrainControls.driveDirectAngleCommand(driverController, TranslationOrientation.FIELD_RELATIVE));
-			// Angular velocity control
-			driverController.leftBumper()
-					.whileTrue(drivetrainControls.driveAngularVelocityCommand(driverController, TranslationOrientation.FIELD_RELATIVE));
-		}
-
-		driverController.b().whileTrue(drivetrainControls.setSpeedMultiplierCommand(() -> DrivetrainConstants.TRANSLATION_SCALE_FAST));
-		driverController.x().whileTrue(drivetrain.lockCommand());
-
-		driverController.rightBumper().whileTrue(drivetrainControls.setSpeedMultiplierCommand(() -> DrivetrainConstants.TRANSLATION_SCALE_SLOW));
-
-		driverController.start().onTrue(drivetrain.zeroGyroWithAllianceCommand());
-	}
+	private void configureDriverControls() {}
 
 	/**
 	 * Configures {@link Triggers} to bind Commands to the Operator Controller buttons.
@@ -144,21 +90,6 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public Command getAutonomousCommand() {
-		// resetLastAngleScalar stops the robot from trying to turn back to its original angle after the auto ends
-		if (autoChooser == null) {
-			return Commands.runOnce(() -> System.out.println("Auto builder not made! Is the alliance set?"));
-		}
-		return autoChooser.getSelected()
-				.finallyDo(drivetrain::resetLastAngleScalar);
-	}
-
-	/**
-	 * Set the auto chooser
-	 *
-	 * @param auto
-	 *            a sendable chooser with Commands for the autos
-	 */
-	public void setAutoChooser(SendableChooser<Command> auto) {
-		autoChooser = auto;
+		return Commands.none();
 	}
 }
