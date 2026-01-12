@@ -108,6 +108,7 @@ public class VersionConstants {
 	/**
 	 * Logs the metadata to SignalLogger.
 	 */
+	@SuppressWarnings("all")
 	public static void logSignals() {
 		SignalLogger.writeString("/Metadata/MavenGroup", MAVEN_GROUP);
 		SignalLogger.writeString("/Metadata/MavenName", MAVEN_NAME);
