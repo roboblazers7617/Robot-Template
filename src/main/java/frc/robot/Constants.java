@@ -68,16 +68,6 @@ public final class Constants {
 	}
 
 	/**
-	 * Constants used to configure vision.
-	 */
-	public static class VisionConstants {
-		/**
-		 * Enable vision odometry updates.
-		 */
-		public static final boolean ENABLE_VISION = true;
-	}
-
-	/**
 	 * Constants that describe the physical layout of the field.
 	 */
 	public static class FieldConstants {
